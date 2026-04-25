@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopEasy — Lancez votre empire e-commerce dès aujourd'hui</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --or:#FF4D00;--or2:#FF7340;--or-g:linear-gradient(135deg,#FF4D00,#FF9A3C);
+  --grn:#00E5A0;--grn2:#00C48C;
+  --bl:#0A0A0F;--bl2:#12121A;--bl3:#1C1C28;--bl4:#252535;
+  --lt:#F5F0E8;--w:#fff;
+  --mid:#8888A0;--mid2:#AAAABC;
+  --ylw:#FFD166;--pink:#FF4D8B;
+  --r:20px;--r2:14px;
+  font-size:16px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Cabinet Grotesk',sans-serif;
+  background:var(--bl);color:var(--w);
+  overflow-x:hidden;cursor:none;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+#cursor{
+  position:fixed;width:12px;height:12px;
+  background:var(--or);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .2s,height .2s,background .2s;
+  mix-blend-mode:difference;
+}
+#cursor-ring{
+  position:fixed;width:40px;height:40px;
+  border:1.5px solid rgba(255,77,0,.4);
+  border-radius:50%;pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:all .12s ease;
+}
+body:hover #cursor{width:12px;height:12px}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:0 5%;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  background:rgba(10,10,15,.85);backdrop-filter:blur(20px);
+}
+.logo{
+  font-family:'Clash Display',sans-serif;
+  font-weight:700;font-size:1.5rem;color:var(--w);
+  text-decoration:none;display:flex;align-items:center;gap:10px;
+}
+.logo-mark{
+  width:32px;height:32px;background:var(--or-g);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;
+}
+.nav-links{display:flex;gap:2px}
+.nav-links a{
+  color:var(--mid2);font-size:.875rem;font-weight:500;
+  padding:7px 16px;border-radius:50px;text-decoration:none;
+  transition:all .2s;
+}
+.nav-links a:hover{color:var(--w);background:rgba(255,255,255,.07)}
+.nav-end{display:flex;gap:10px;align-items:center}
+.btn-ghost-nav{
+  color:var(--mid2);background:transparent;border:1px solid rgba(255,255,255,.15);
+  padding:8px 20px;border-radius:50px;font-family:'Cabinet Grotesk',sans-serif;
+  font-size:.875rem;font-weight:600;cursor:none;text-decoration:none;
+  transition:all .2s;
+}
+.btn-ghost-nav:hover{color:var(--w);border-color:rgba(255,255,255,.4)}
+.btn-cta-nav{
+  background:var(--or-g);color:var(--w);
+  padding:9px 22px;border-radius:50px;
+  font-family:'Cabinet Grotesk',sans-serif;font-size:.875rem;font-weight:700;
+  border:none;cursor:none;text-decoration:none;display:inline-block;
+  transition:all .25s;box-shadow:0 0 20px rgba(255,77,0,.3);
+}
+.btn-cta-nav:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(255,77,0,.5)}
+@media(max-width:768px){.nav-links{display:none}.btn-ghost-nav{display:none}}
+
+/* ===== HERO — FULL SCREEN ===== */
+.hero{
+  min-height:100vh;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;
+  padding:120px 5% 80px;
+}
+/* Animated gradient mesh background */
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 50%,rgba(255,77,0,.18) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 20%,rgba(0,229,160,.1) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 100%,rgba(255,77,0,.08) 0%,transparent 60%),
+    var(--bl);
+  animation:bgPulse 8s ease-in-out infinite alternate;
+}
+@keyframes bgPulse{
+  0%{background-position:0% 0%}
+  100%{
+    background:
+      radial-gradient(ellipse 80% 60% at 40% 30%,rgba(255,77,0,.22) 0%,transparent 60%),
+      radial-gradient(ellipse 60% 80% at 60% 80%,rgba(0,229,160,.12) 0%,transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 60%,rgba(255,77,139,.08) 0%,transparent 60%),
+      var(--bl);
+  }
+}
+
+/* Canvas particles */
+#particles{position:absolute;inset:0;pointer-events:none}
+
+/* Grid overlay */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);
+}
+
+.hero-content{position:relative;z-index:10;max-width:900px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  padding:8px 20px;border-radius:50px;
+  font-size:.8rem;font-weight:700;letter-spacing:.5px;
+  margin-bottom:32px;color:var(--mid2);
+  animation:fadeDown .8s ease both;
+}
+.hero-badge .dot{width:8px;height:8px;background:var(--grn);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero-title{
+  font-family:'Clash Display',sans-serif;
+  font-size:clamp(3rem,7vw,6rem);
+  font-weight:700;line-height:1.0;
+  letter-spacing:-2px;
+  margin-bottom:24px;
+  animation:fadeUp 1s ease .2s both;
+}
+.hero-title .line1{display:block;color:var(--w)}
+.hero-title .line2{
+  display:block;
+  background:var(--or-g);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  position:relative;
+}
+.hero-title .line3{display:block;color:var(--mid2);font-size:75%}
+
+.hero-sub{
+  font-size:1.15rem;color:var(--mid2);line-height:1.75;
+  max-width:600px;margin:0 auto 40px;
+  animation:fadeUp 1s ease .4s both;
+}
+.hero-sub strong{color:var(--w)}
+
+.hero-ctas{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:64px;
+  animation:fadeUp 1s ease .6s both;
+}
+.btn-hero{
+  background:var(--or-g);color:var(--w);
+  padding:18px 40px;border-radius:50px;
+  font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:1.05rem;
+  border:none;cursor:none;text-decoration:none;
+  display:inline-flex;align-items:center;gap:10px;
+  transition:all .3s;
+  box-shadow:0 0 40px rgba(255,77,0,.35),0 4px 20px rgba(0,0,0,.4);
+  position:relative;overflow:hidden;
+}
+.btn-hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.2),transparent);
+  border-radius:50px;
+}
+.btn-hero:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 0 60px rgba(255,77,0,.55),0 10px 30px rgba(0,0,0,.4)}
+.btn-hero2{
+  background:rgba(255,255,255,.07);color:var(--w);
+  padding:18px 36px;border-radius:50px;
+  font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:1.05rem;
+  border:1px solid rgba(255,255,255,.15);cursor:none;text-decoration:none;
+  display:inline-flex;align-items:center;gap:10px;
+  transition:all .3s;backdrop-filter:blur(10px);
+}
+.btn-hero2:hover{background:rgba(255,255,255,.13);transform:translateY(-3px)}
+
+/* Brand logos strip */
+.brands-strip{
+  animation:fadeUp 1s ease .8s both;
+}
+.brands-label{font-size:.75rem;color:var(--mid);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+.brands-logos{
+  display:flex;align-items:center;justify-content:center;
+  gap:28px;flex-wrap:wrap;
+}
+.brand-logo{
+  padding:10px 18px;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);border-radius:10px;
+  font-weight:800;font-size:.9rem;letter-spacing:1px;
+  color:rgba(255,255,255,.4);transition:all .3s;
+  display:flex;align-items:center;gap:7px;
+}
+.brand-logo:hover{color:rgba(255,255,255,.8);background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+
+/* Scroll indicator */
+.scroll-indicator{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--mid);font-size:.75rem;animation:fadeUp 1s ease 1.2s both;
+}
+.scroll-mouse{
+  width:22px;height:36px;border:2px solid rgba(255,255,255,.2);
+  border-radius:11px;display:flex;justify-content:center;padding-top:6px;
+}
+.scroll-wheel{
+  width:3px;height:8px;background:var(--or);border-radius:2px;
+  animation:scrollDown 2s ease-in-out infinite;
+}
+@keyframes scrollDown{0%,100%{transform:translateY(0);opacity:1}60%{transform:translateY(10px);opacity:0}}
+
+/* ===== STATS TICKER ===== */
+.stats-ticker{
+  background:var(--bl2);border-top:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:20px 0;overflow:hidden;
+}
+.ticker-track{
+  display:flex;gap:60px;animation:ticker 25s linear infinite;
+  width:max-content;
+}
+.ticker-item{
+  display:flex;align-items:center;gap:14px;white-space:nowrap;flex-shrink:0;
+}
+.ticker-num{font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--or)}
+.ticker-lbl{font-size:.85rem;color:var(--mid2);font-weight:500}
+.ticker-sep{color:rgba(255,255,255,.1);font-size:1.2rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== SECTIONS GENERIC ===== */
+.section{padding:100px 5%}
+.s-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,77,0,.1);border:1px solid rgba(255,77,0,.2);
+  color:var(--or2);font-size:.75rem;font-weight:700;
+  padding:5px 14px;border-radius:50px;
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;
+}
+.s-badge.grn{background:rgba(0,229,160,.08);border-color:rgba(0,229,160,.2);color:var(--grn)}
+.s-badge.ylw{background:rgba(255,209,102,.08);border-color:rgba(255,209,102,.2);color:var(--ylw)}
+h2{
+  font-family:'Clash Display',sans-serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:700;
+  line-height:1.1;letter-spacing:-1px;margin-bottom:16px;
+}
+h2 .grad{
+  background:var(--or-g);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.s-sub{font-size:1rem;color:var(--mid2);line-height:1.75;max-width:560px}
+.center{text-align:center;max-width:700px;margin:0 auto 64px}
+.center .s-sub{margin:0 auto}
+
+/* ===== DEMO INTERACTIVE ===== */
+.demo-section{background:var(--bl2);padding:100px 5%}
+.demo-wrapper{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:60px;align-items:center;margin-top:64px;
+}
+.demo-steps{display:flex;flex-direction:column;gap:16px}
+.demo-step{
+  display:flex;gap:18px;align-items:flex-start;
+  padding:20px 22px;border-radius:16px;
+  border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);
+  cursor:none;transition:all .3s;
+}
+.demo-step.active,.demo-step:hover{
+  background:rgba(255,77,0,.08);border-color:rgba(255,77,0,.25);
+}
+.demo-step-num{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,77,0,.15);border:1px solid rgba(255,77,0,.3);
+  color:var(--or);font-weight:800;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.demo-step.active .demo-step-num{background:var(--or);color:white}
+.demo-step-info h4{font-size:.95rem;font-weight:700;margin-bottom:4px}
+.demo-step-info p{font-size:.8rem;color:var(--mid2);line-height:1.6}
+
+/* Demo preview panel */
+.demo-preview{
+  background:var(--bl3);border-radius:24px;
+  border:1px solid rgba(255,255,255,.08);
+  overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5);
+  position:relative;
+}
+.demo-panel{display:none;animation:fadeUp .4s ease}
+.demo-panel.active{display:block}
+.dp-bar{
+  background:var(--bl4);padding:12px 16px;
+  display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.dp-dots{display:flex;gap:6px}
+.dp-dot{width:10px;height:10px;border-radius:50%}
+.dp-dot:nth-child(1){background:#FF5F57}
+.dp-dot:nth-child(2){background:#FEBC2E}
+.dp-dot:nth-child(3){background:#28C840}
+.dp-url{
+  flex:1;background:rgba(255,255,255,.06);border-radius:6px;
+  padding:5px 12px;font-size:.72rem;color:var(--mid2);margin-left:8px;
+}
+.dp-body{padding:20px}
+
+/* Step 1 — Name input */
+.name-input-demo{margin-bottom:16px}
+.name-input-demo label{font-size:.75rem;color:var(--mid2);font-weight:600;display:block;margin-bottom:8px}
+.name-input-demo input{
+  width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;padding:12px 14px;color:white;font-family:'Cabinet Grotesk',sans-serif;
+  font-size:.9rem;outline:none;transition:border-color .2s;
+}
+.name-input-demo input:focus{border-color:var(--or)}
+.name-input-demo input::placeholder{color:var(--mid)}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.cat-btn{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;padding:10px 8px;text-align:center;cursor:none;
+  transition:all .2s;font-size:.8rem;
+}
+.cat-btn:hover,.cat-btn.sel{background:rgba(255,77,0,.12);border-color:rgba(255,77,0,.3);color:var(--or2)}
+.demo-btn-go{
+  width:100%;background:var(--or-g);color:white;border:none;
+  padding:13px;border-radius:12px;font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:700;font-size:.95rem;cursor:none;transition:all .2s;
+}
+.demo-btn-go:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,77,0,.3)}
+
+/* Step 2 — Theme picker mini */
+.theme-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.theme-mini{
+  border-radius:10px;overflow:hidden;cursor:none;
+  border:2px solid transparent;transition:all .2s;height:70px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:700;position:relative;
+}
+.theme-mini:hover,.theme-mini.sel{border-color:var(--or);transform:scale(1.05)}
+.theme-mini span{position:absolute;bottom:4px;color:white;font-size:.5rem;opacity:.8}
+.tm1{background:linear-gradient(135deg,#131921,#FF9900)}
+.tm2{background:linear-gradient(135deg,#fff,#E02680)}
+.tm3{background:linear-gradient(135deg,#000,#0066CC)}
+.tm4{background:linear-gradient(135deg,#1A1A2E,#F7C600)}
+.tm5{background:linear-gradient(135deg,#FF6900,#FFB347)}
+.tm6{background:linear-gradient(135deg,#2D0B3A,#FF85C2)}
+.color-row{display:flex;gap:8px;margin-bottom:16px;align-items:center}
+.color-row label{font-size:.75rem;color:var(--mid2);font-weight:600;flex-shrink:0}
+.color-swatch{width:28px;height:28px;border-radius:50%;cursor:none;border:2px solid transparent;transition:all .2s}
+.color-swatch:hover,.color-swatch.sel{border-color:white;transform:scale(1.2)}
+
+/* Step 3 — Products */
+.prod-import-demo{margin-bottom:16px}
+.prod-import-demo label{font-size:.75rem;color:var(--mid2);font-weight:600;display:block;margin-bottom:8px}
+.prod-import-demo .link-input{
+  display:flex;gap:8px;
+}
+.prod-import-demo input{
+  flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;padding:10px 12px;color:white;font-family:'Cabinet Grotesk',sans-serif;
+  font-size:.78rem;outline:none;
+}
+.prod-import-demo button{
+  background:var(--grn);color:var(--bl);border:none;
+  padding:10px 14px;border-radius:10px;font-weight:700;font-size:.78rem;
+  cursor:none;transition:all .2s;white-space:nowrap;
+}
+.prod-mini-list{display:flex;flex-direction:column;gap:8px}
+.prod-mini{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.04);border-radius:10px;padding:10px 12px;
+}
+.pm-img{font-size:1.2rem}
+.pm-info{flex:1}
+.pm-name{font-size:.8rem;font-weight:700}
+.pm-price{font-size:.7rem;color:var(--mid2)}
+.pm-badge{background:var(--grn);color:var(--bl);font-size:.65rem;font-weight:800;padding:2px 8px;border-radius:50px}
+
+/* Step 4 — Live preview */
+.live-store{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.ls-header{padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
+.ls-logo{font-family:'Clash Display',sans-serif;font-size:.9rem;font-weight:700}
+.ls-nav{display:flex;gap:10px;font-size:.55rem;color:var(--mid2)}
+.ls-products{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 14px}
+.ls-prod{border-radius:8px;overflow:hidden}
+.ls-prod-img{height:50px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.ls-prod-info{padding:6px 8px}
+.ls-prod-name{font-size:.6rem;font-weight:700}
+.ls-prod-price{font-size:.6rem;color:var(--or);font-weight:700}
+.ls-footer{text-align:center;padding:8px;font-size:.5rem;color:var(--mid)}
+
+/* ===== MARGIN SIMULATOR ===== */
+.simulator-section{padding:100px 5%;background:var(--bl)}
+.sim-wrapper{
+  max-width:800px;margin:64px auto 0;
+  background:var(--bl2);border-radius:28px;
+  border:1px solid rgba(255,255,255,.07);
+  overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.4);
+}
+.sim-top{
+  background:linear-gradient(135deg,rgba(255,77,0,.15),rgba(0,229,160,.1));
+  padding:32px 40px;border-bottom:1px solid rgba(255,255,255,.07);
+}
+.sim-top h3{font-family:'Clash Display',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:6px}
+.sim-top p{color:var(--mid2);font-size:.9rem}
+.sim-body{padding:32px 40px}
+.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px}
+.sim-field label{
+  display:block;font-size:.75rem;font-weight:700;color:var(--mid2);
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;
+}
+.sim-input-wrap{position:relative}
+.sim-input-wrap .prefix{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  color:var(--mid2);font-weight:700;font-size:1rem;
+}
+.sim-field input[type=number]{
+  width:100%;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);border-radius:12px;
+  padding:14px 14px 14px 32px;color:white;
+  font-family:'Clash Display',sans-serif;font-size:1.4rem;font-weight:700;
+  outline:none;transition:border-color .2s;
+  -moz-appearance:textfield;
+}
+.sim-field input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+.sim-field input:focus{border-color:var(--or)}
+.sim-field input[type=range]{
+  width:100%;height:6px;-webkit-appearance:none;appearance:none;
+  background:rgba(255,255,255,.1);border-radius:3px;outline:none;margin-top:10px;
+  cursor:none;
+}
+.sim-field input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:20px;height:20px;
+  background:var(--or);border-radius:50%;cursor:none;
+  box-shadow:0 0 10px rgba(255,77,0,.5);
+}
+.sim-results{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  margin-bottom:28px;
+}
+.sim-result{
+  background:rgba(255,255,255,.04);border-radius:14px;
+  padding:18px 14px;text-align:center;border:1px solid rgba(255,255,255,.06);
+  transition:all .3s;
+}
+.sim-result.highlight{background:rgba(255,77,0,.1);border-color:rgba(255,77,0,.25)}
+.sim-result.superlight{background:rgba(0,229,160,.07);border-color:rgba(0,229,160,.2)}
+.sim-result .r-num{
+  font-family:'Clash Display',sans-serif;font-size:1.6rem;font-weight:700;
+  margin-bottom:4px;transition:all .3s;
+}
+.sim-result .r-lbl{font-size:.72rem;color:var(--mid2);font-weight:600}
+.sim-result.highlight .r-num{color:var(--or)}
+.sim-result.superlight .r-num{color:var(--grn)}
+.sim-projection{
+  background:linear-gradient(135deg,rgba(255,77,0,.08),rgba(0,229,160,.06));
+  border-radius:14px;padding:20px 24px;
+  display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:16px;
+  border:1px solid rgba(255,255,255,.06);
+}
+.proj-item{text-align:center}
+.proj-num{font-family:'Clash Display',sans-serif;font-size:1.8rem;font-weight:700;color:var(--grn)}
+.proj-lbl{font-size:.75rem;color:var(--mid2)}
+
+/* ===== COMPARISON ===== */
+.comparison-section{background:var(--bl2);padding:100px 5%}
+.comp-table{
+  max-width:860px;margin:64px auto 0;
+  border-radius:24px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 40px 80px rgba(0,0,0,.4);
+}
+.comp-head{
+  display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;
+  background:var(--bl3);padding:20px 28px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.comp-head-cell{font-size:.8rem;font-weight:700;color:var(--mid2);text-align:center}
+.comp-head-cell.us{
+  text-align:center;
+  background:var(--or-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-size:.9rem;
+}
+.comp-head-cell:first-child{text-align:left;color:var(--mid)}
+.comp-row{
+  display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;
+  padding:16px 28px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  background:var(--bl2);
+  transition:background .2s;align-items:center;
+}
+.comp-row:hover{background:rgba(255,255,255,.03)}
+.comp-row:last-child{border-bottom:none}
+.comp-feat{font-size:.875rem;font-weight:600;color:var(--w)}
+.comp-val{text-align:center;font-size:.875rem;font-weight:700}
+.comp-val.yes{color:var(--grn)}
+.comp-val.no{color:rgba(255,255,255,.25)}
+.comp-val.us-val{
+  text-align:center;font-family:'Clash Display',sans-serif;
+  font-size:1rem;color:var(--or);
+}
+.comp-val.price-us{color:var(--grn);font-family:'Clash Display',sans-serif;font-size:1.1rem}
+.comp-val.price-bad{color:rgba(255,77,77,.7)}
+
+/* ===== BLOG SECTION ===== */
+.blog-section{padding:100px 5%;background:var(--bl)}
+.blog-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:24px;margin-top:64px;
+}
+.blog-card{
+  background:var(--bl2);border-radius:20px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.06);
+  transition:all .3s;cursor:none;
+}
+.blog-card:hover{transform:translateY(-6px);border-color:rgba(255,77,0,.25);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.blog-card.featured{grid-row:span 2}
+.blog-img{
+  height:180px;display:flex;align-items:center;justify-content:center;
+  font-size:4rem;position:relative;overflow:hidden;
+}
+.blog-card.featured .blog-img{height:260px}
+.bi1{background:linear-gradient(135deg,#1A1A2E,#FF4D00)}
+.bi2{background:linear-gradient(135deg,#0D1B2E,#00C8FF)}
+.bi3{background:linear-gradient(135deg,#2D0B3A,#FF85C2)}
+.bi4{background:linear-gradient(135deg,#0A1F0A,#00E5A0)}
+.bi5{background:linear-gradient(135deg,#1A1500,#FFD166)}
+.blog-cat{
+  position:absolute;top:12px;left:12px;
+  background:rgba(0,0,0,.6);backdrop-filter:blur(10px);
+  color:white;font-size:.7rem;font-weight:700;
+  padding:4px 12px;border-radius:50px;border:1px solid rgba(255,255,255,.15);
+}
+.blog-body{padding:20px 22px}
+.blog-body h4{
+  font-family:'Clash Display',sans-serif;
+  font-size:1rem;font-weight:700;line-height:1.3;margin-bottom:10px;
+}
+.blog-card.featured .blog-body h4{font-size:1.2rem}
+.blog-body p{font-size:.82rem;color:var(--mid2);line-height:1.65;margin-bottom:14px}
+.blog-meta{display:flex;align-items:center;justify-content:space-between}
+.blog-time{font-size:.72rem;color:var(--mid);font-weight:600}
+.blog-read{
+  font-size:.72rem;color:var(--or);font-weight:700;
+  display:flex;align-items:center;gap:4px;
+}
+
+/* ===== PRICING ===== */
+.pricing-section{background:var(--bl2);padding:100px 5%}
+.p-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:64px}
+.p-card{
+  background:var(--bl3);border-radius:24px;padding:36px 28px;
+  flex:1;min-width:260px;max-width:300px;
+  border:1px solid rgba(255,255,255,.07);
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.p-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--or-g);opacity:0;transition:opacity .3s;
+}
+.p-card:hover{transform:translateY(-6px);border-color:rgba(255,77,0,.2)}
+.p-card:hover::before{opacity:1}
+.p-card.pop{border-color:rgba(255,77,0,.3);background:rgba(255,77,0,.07)}
+.p-card.pop::before{opacity:1}
+.pop-pill{
+  display:inline-block;background:var(--or-g);color:white;
+  font-size:.7rem;font-weight:800;padding:3px 12px;border-radius:50px;
+  margin-bottom:16px;letter-spacing:.5px;
+}
+.p-name{font-size:.75rem;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.p-price{
+  font-family:'Clash Display',sans-serif;
+  font-size:3.5rem;font-weight:700;line-height:1;margin-bottom:6px;
+}
+.p-price sup{font-size:1.3rem;vertical-align:top;margin-top:10px;display:inline-block}
+.p-price sub{font-size:.85rem;font-weight:400;opacity:.5}
+.p-desc{font-size:.82rem;color:var(--mid2);margin-bottom:28px}
+.p-feats{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:30px}
+.p-feats li{display:flex;align-items:center;gap:10px;font-size:.875rem;color:rgba(255,255,255,.7)}
+.p-feats li .check{color:var(--grn);font-size:.9rem;flex-shrink:0}
+.p-feats li .cross{color:rgba(255,255,255,.2);font-size:.9rem;flex-shrink:0}
+.p-btn{
+  width:100%;padding:13px;border-radius:12px;
+  font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:.95rem;
+  cursor:none;border:1px solid rgba(255,255,255,.12);
+  background:transparent;color:white;transition:all .2s;
+}
+.p-btn:hover{background:rgba(255,255,255,.07)}
+.p-card.pop .p-btn{background:var(--or-g);border-color:transparent;box-shadow:0 8px 24px rgba(255,77,0,.3)}
+.p-card.pop .p-btn:hover{box-shadow:0 12px 32px rgba(255,77,0,.4);transform:translateY(-2px)}
+
+/* ===== FINAL CTA ===== */
+.final-cta{
+  padding:120px 5%;text-align:center;position:relative;overflow:hidden;
+  background:var(--bl);
+}
+.final-cta-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(255,77,0,.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+.final-cta-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,77,0,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,77,0,.05) 1px,transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black 20%,transparent 80%);
+  pointer-events:none;
+}
+.final-cta-content{position:relative;z-index:2}
+.final-cta h2{font-size:clamp(2.5rem,5vw,4.5rem);letter-spacing:-2px;margin-bottom:18px}
+.final-cta p{font-size:1.1rem;color:var(--mid2);margin-bottom:48px;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-trust-chips{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.trust-chip-dk{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  padding:8px 16px;border-radius:50px;font-size:.8rem;font-weight:600;color:var(--mid2);
+}
+.trust-chip-dk .ic{color:var(--grn)}
+
+/* ===== FOOTER ===== */
+footer{
+  background:var(--bl2);border-top:1px solid rgba(255,255,255,.06);
+  padding:60px 5% 32px;
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;margin-bottom:48px;
+}
+.footer-brand .logo{margin-bottom:14px;display:inline-flex}
+.footer-brand p{font-size:.85rem;color:var(--mid2);line-height:1.7;max-width:280px;margin-bottom:20px}
+.footer-social{display:flex;gap:10px}
+.soc-btn{
+  width:36px;height:36px;background:rgba(255,255,255,.06);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;transition:all .2s;border:1px solid rgba(255,255,255,.08);
+}
+.soc-btn:hover{background:var(--or);border-color:var(--or)}
+.footer-col h5{font-weight:700;font-size:.875rem;margin-bottom:16px;color:var(--w)}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul a{color:var(--mid2);text-decoration:none;font-size:.85rem;transition:color .2s}
+.footer-col ul a:hover{color:var(--or)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding-top:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+  font-size:.8rem;color:var(--mid);
+}
+.footer-badges{display:flex;gap:10px;flex-wrap:wrap}
+.f-badge{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  padding:4px 12px;border-radius:6px;font-size:.7rem;font-weight:600;color:var(--mid2);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bl)}
+::-webkit-scrollbar-thumb{background:var(--bl4);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--or)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .demo-wrapper{grid-template-columns:1fr}
+  .sim-grid{grid-template-columns:1fr}
+  .sim-results{grid-template-columns:repeat(2,1fr)}
+  .blog-grid{grid-template-columns:1fr}
+  .blog-card.featured{grid-row:span 1}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .comp-head,.comp-row{grid-template-columns:2fr 1fr 1fr 1fr;font-size:.72rem;padding:12px 14px}
+}
+@media(max-width:600px){
+  body{cursor:auto}
+  #cursor,#cursor-ring{display:none}
+  .sim-results{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- CANVAS PARTICLES -->
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo">
+    <div class="logo-mark">🛍</div>
+    ShopEasy
+  </a>
+  <div class="nav-links">
+    <a href="#demo">Démo</a>
+    <a href="#simulateur">Simulateur</a>
+    <a href="#comparaison">Comparaison</a>
+    <a href="#blog">Conseils</a>
+    <a href="#tarifs">Tarifs</a>
+  </div>
+  <div class="nav-end">
+    <a href="#" class="btn-ghost-nav">Connexion</a>
+    <a href="#tarifs" class="btn-cta-nav">Commencer →</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      1 437 boutiques actives · Vendeurs 100% vérifiés SIRET
+    </div>
+
+    <h1 class="hero-title">
+      <span class="line1">Votre boutique.</span>
+      <span class="line2">Votre empire.</span>
+      <span class="line3">À 9,90€ / mois.</span>
+    </h1>
+
+    <p class="hero-sub">
+      La plateforme dropshipping <strong>la plus accessible de France</strong>.<br>
+      Import Alibaba & Shein en 1 clic · Vendeurs vérifiés SIRET · <strong>3× moins cher</strong> que Shopify.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#demo" class="btn-hero">🚀 Créer ma boutique — Gratuit</a>
+      <a href="#simulateur" class="btn-hero2">💰 Simuler mes gains</a>
+    </div>
+
+    <div class="brands-strip">
+      <div class="brands-label">Compatible & sécurisé avec</div>
+      <div class="brands-logos">
+        <div class="brand-logo">🛒 Alibaba</div>
+        <div class="brand-logo">👗 Shein</div>
+        <div class="brand-logo">📦 AliExpress</div>
+        <div class="brand-logo">💳 Stripe</div>
+        <div class="brand-logo">🅿️ PayPal</div>
+        <div class="brand-logo"> Apple Pay</div>
+        <div class="brand-logo">🏪 PCS Tabac</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span>Défiler</span>
+  </div>
+</section>
+
+<!-- STATS TICKER -->
+<div class="stats-ticker">
+  <div class="ticker-track" id="ticker">
+    <div class="ticker-item"><span class="ticker-num">1 437</span><span class="ticker-lbl">Boutiques actives</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">248 600€</span><span class="ticker-lbl">Générés ce mois</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">9,90€</span><span class="ticker-lbl">Seulement / mois</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">0%</span><span class="ticker-lbl">Commission sur vos ventes</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">4.9★</span><span class="ticker-lbl">Note moyenne vendeurs</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">10</span><span class="ticker-lbl">Thèmes pro inclus</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">5</span><span class="ticker-lbl">Modes de paiement</span></div>
+    <div class="ticker-sep">·</div>
+    <!-- Duplicate for loop -->
+    <div class="ticker-item"><span class="ticker-num">1 437</span><span class="ticker-lbl">Boutiques actives</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">248 600€</span><span class="ticker-lbl">Générés ce mois</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">9,90€</span><span class="ticker-lbl">Seulement / mois</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">0%</span><span class="ticker-lbl">Commission sur vos ventes</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">4.9★</span><span class="ticker-lbl">Note moyenne vendeurs</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">10</span><span class="ticker-lbl">Thèmes pro inclus</span></div>
+    <div class="ticker-sep">·</div>
+    <div class="ticker-item"><span class="ticker-num">5</span><span class="ticker-lbl">Modes de paiement</span></div>
+    <div class="ticker-sep">·</div>
+  </div>
+</div>
+
+<!-- ===== DEMO INTERACTIVE ===== -->
+<section class="demo-section" id="demo">
+  <div class="center reveal">
+    <div class="s-badge">⚡ Démo Interactive</div>
+    <h2>Créez votre boutique<br><span class="grad">en 4 étapes</span></h2>
+    <p class="s-sub">Voyez comment c'est simple. Chaque vendeur passe exactement par ces étapes pour avoir sa boutique en ligne en moins de 10 minutes.</p>
+  </div>
+
+  <div class="demo-wrapper reveal">
+    <div class="demo-steps">
+      <div class="demo-step active" onclick="showPanel(1,this)">
+        <div class="demo-step-num">1</div>
+        <div class="demo-step-info">
+          <h4>🏪 Nom & Catégorie</h4>
+          <p>Choisissez le nom de votre boutique et votre secteur d'activité.</p>
+        </div>
+      </div>
+      <div class="demo-step" onclick="showPanel(2,this)">
+        <div class="demo-step-num">2</div>
+        <div class="demo-step-info">
+          <h4>🎨 Thème & Couleurs</h4>
+          <p>Parmi 10 thèmes pro, choisissez votre style et personnalisez vos couleurs.</p>
+        </div>
+      </div>
+      <div class="demo-step" onclick="showPanel(3,this)">
+        <div class="demo-step-num">3</div>
+        <div class="demo-step-info">
+          <h4>📦 Import Produits</h4>
+          <p>Collez un lien Alibaba ou Shein, on importe tout automatiquement.</p>
+        </div>
+      </div>
+      <div class="demo-step" onclick="showPanel(4,this)">
+        <div class="demo-step-num">4</div>
+        <div class="demo-step-info">
+          <h4>🚀 Ma boutique est en ligne !</h4>
+          <p>Votre boutique est prête, vérifiée, et accessible à vos clients.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-preview">
+      <!-- Panel 1 -->
+      <div class="demo-panel active" id="panel1">
+        <div class="dp-bar">
+          <div class="dp-dots"><div class="dp-dot"></div><div class="dp-dot"></div><div class="dp-dot"></div></div>
+          <div class="dp-url">shopeasy.fr/creer-ma-boutique</div>
+        </div>
+        <div class="dp-body">
+          <div style="font-size:.7rem;font-weight:700;color:var(--mid2);margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px">Étape 1 — Infos de base</div>
+          <div class="name-input-demo">
+            <label>Nom de votre boutique</label>
+            <input type="text" id="shopNameInput" placeholder="Ex : Ma Boutique Mode..." oninput="updateShopName(this.value)">
+          </div>
+          <div style="font-size:.75rem;color:var(--mid2);font-weight:600;margin-bottom:10px">Catégorie principale</div>
+          <div class="cat-grid">
+            <div class="cat-btn" onclick="selCat(this)">👗 Mode</div>
+            <div class="cat-btn" onclick="selCat(this)">💻 High-Tech</div>
+            <div class="cat-btn" onclick="selCat(this)">🏠 Maison</div>
+            <div class="cat-btn" onclick="selCat(this)">💄 Beauté</div>
+            <div class="cat-btn" onclick="selCat(this)">⚽ Sport</div>
+            <div class="cat-btn" onclick="selCat(this)">🎮 Gadgets</div>
+          </div>
+          <button class="demo-btn-go" onclick="showPanel(2,document.querySelectorAll('.demo-step')[1])">Étape suivante →</button>
+        </div>
+      </div>
+
+      <!-- Panel 2 -->
+      <div class="demo-panel" id="panel2">
+        <div class="dp-bar">
+          <div class="dp-dots"><div class="dp-dot"></div><div class="dp-dot"></div><div class="dp-dot"></div></div>
+          <div class="dp-url">shopeasy.fr/creer-ma-boutique/theme</div>
+        </div>
+        <div class="dp-body">
+          <div style="font-size:.7rem;font-weight:700;color:var(--mid2);margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px">Étape 2 — Thème & Design</div>
+          <div class="theme-mini-grid">
+            <div class="theme-mini tm1 sel" onclick="selTheme(this)"><span>Amazon</span></div>
+            <div class="theme-mini tm2" onclick="selTheme(this)"><span>Shein</span></div>
+            <div class="theme-mini tm3" onclick="selTheme(this)"><span>Luxe</span></div>
+            <div class="theme-mini tm4" onclick="selTheme(this)"><span>High-Tech</span></div>
+            <div class="theme-mini tm5" onclick="selTheme(this)"><span>Mode</span></div>
+            <div class="theme-mini tm6" onclick="selTheme(this)"><span>Beauté</span></div>
+          </div>
+          <div class="color-row">
+            <label>Couleur principale :</label>
+            <div class="color-swatch sel" style="background:#FF4D00" onclick="selColor(this)"></div>
+            <div class="color-swatch" style="background:#0066FF" onclick="selColor(this)"></div>
+            <div class="color-swatch" style="background:#E02680" onclick="selColor(this)"></div>
+            <div class="color-swatch" style="background:#00C48C" onclick="selColor(this)"></div>
+            <div class="color-swatch" style="background:#FFD166" onclick="selColor(this)"></div>
+          </div>
+          <button class="demo-btn-go" onclick="showPanel(3,document.querySelectorAll('.demo-step')[2])">Choisir ce thème →</button>
+        </div>
+      </div>
+
+      <!-- Panel 3 -->
+      <div class="demo-panel" id="panel3">
+        <div class="dp-bar">
+          <div class="dp-dots"><div class="dp-dot"></div><div class="dp-dot"></div><div class="dp-dot"></div></div>
+          <div class="dp-url">shopeasy.fr/creer-ma-boutique/produits</div>
+        </div>
+        <div class="dp-body">
+          <div style="font-size:.7rem;font-weight:700;color:var(--mid2);margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px">Étape 3 — Importez vos produits</div>
+          <div class="prod-import-demo">
+            <label>Lien produit Alibaba / Shein / AliExpress</label>
+            <div class="link-input">
+              <input type="text" placeholder="https://alibaba.com/product/...">
+              <button onclick="importProduct()">⚡ Importer</button>
+            </div>
+          </div>
+          <div class="prod-mini-list" id="prodList">
+            <div class="prod-mini"><span class="pm-img">👗</span><div class="pm-info"><div class="pm-name">Robe été tendance</div><div class="pm-price">Achat 3€ → Vous vendez 18€</div></div><span class="pm-badge">+500%</span></div>
+            <div class="prod-mini"><span class="pm-img">🕶️</span><div class="pm-info"><div class="pm-name">Lunettes de soleil</div><div class="pm-price">Achat 2€ → Vous vendez 12€</div></div><span class="pm-badge">+500%</span></div>
+          </div>
+          <button class="demo-btn-go" style="margin-top:14px" onclick="showPanel(4,document.querySelectorAll('.demo-step')[3])">Finaliser ma boutique →</button>
+        </div>
+      </div>
+
+      <!-- Panel 4 — Live store preview -->
+      <div class="demo-panel" id="panel4">
+        <div class="dp-bar">
+          <div class="dp-dots"><div class="dp-dot"></div><div class="dp-dot"></div><div class="dp-dot"></div></div>
+          <div class="dp-url" id="liveUrl">maboutique.shopeasy.fr</div>
+        </div>
+        <div class="dp-body">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+            <div style="width:8px;height:8px;background:var(--grn);border-radius:50%;animation:blink 2s infinite"></div>
+            <span style="font-size:.75rem;color:var(--grn);font-weight:700">🎉 Votre boutique est EN LIGNE !</span>
+          </div>
+          <div class="live-store" id="liveStorePreview">
+            <div class="ls-header" style="background:#131921">
+              <div class="ls-logo" id="lsLogoText" style="color:#FF9900">MA BOUTIQUE</div>
+              <div class="ls-nav"><span>Accueil</span><span>Produits</span><span>Contact</span></div>
+            </div>
+            <div style="background:#1F2D3D;padding:10px 14px;text-align:center">
+              <div style="font-size:.6rem;color:#FF9900;font-weight:700">🔥 SOLDES — Jusqu'à -60% cette semaine !</div>
+            </div>
+            <div class="ls-products" style="background:#131921">
+              <div class="ls-prod"><div class="ls-prod-img" style="background:#232F3E">👗</div><div class="ls-prod-info" style="background:#232F3E"><div class="ls-prod-name" style="color:white">Robe tendance</div><div class="ls-prod-price">18€</div></div></div>
+              <div class="ls-prod"><div class="ls-prod-img" style="background:#232F3E">🕶️</div><div class="ls-prod-info" style="background:#232F3E"><div class="ls-prod-name" style="color:white">Lunettes</div><div class="ls-prod-price">12€</div></div></div>
+              <div class="ls-prod"><div class="ls-prod-img" style="background:#232F3E">👜</div><div class="ls-prod-info" style="background:#232F3E"><div class="ls-prod-name" style="color:white">Sac tendance</div><div class="ls-prod-price">24€</div></div></div>
+            </div>
+            <div class="ls-footer" style="background:#0D1117;color:rgba(255,255,255,.3)">🛡️ Vendeur vérifié SIRET · Paiement sécurisé</div>
+          </div>
+          <div style="margin-top:14px;text-align:center">
+            <button class="demo-btn-go" onclick="window.scrollTo({top:document.getElementById('tarifs').offsetTop-80,behavior:'smooth'})">🚀 Lancer ma vraie boutique</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SIMULATOR ===== -->
+<section class="simulator-section" id="simulateur">
+  <div class="center reveal">
+    <div class="s-badge grn">💰 Simulateur de Gains</div>
+    <h2>Combien pouvez-vous<br><span class="grad">gagner avec ShopEasy ?</span></h2>
+    <p class="s-sub">Entrez votre prix d'achat, votre prix de vente, et le nombre de ventes par mois. Calculez votre bénéfice réel en temps réel.</p>
+  </div>
+
+  <div class="sim-wrapper reveal">
+    <div class="sim-top">
+      <h3>🧮 Votre simulateur de marge</h3>
+      <p>Ajustez les curseurs pour voir vos gains potentiels en temps réel</p>
+    </div>
+    <div class="sim-body">
+      <div class="sim-grid">
+        <div class="sim-field">
+          <label>Prix d'achat (Alibaba / Shein)</label>
+          <div class="sim-input-wrap">
+            <span class="prefix">€</span>
+            <input type="number" id="buyPrice" value="3" min="0.5" max="500" step="0.5" oninput="calcSim()">
+          </div>
+          <input type="range" id="buyRange" min="0.5" max="100" step="0.5" value="3" oninput="document.getElementById('buyPrice').value=this.value;calcSim()">
+        </div>
+        <div class="sim-field">
+          <label>Votre prix de vente</label>
+          <div class="sim-input-wrap">
+            <span class="prefix">€</span>
+            <input type="number" id="sellPrice" value="12" min="1" max="1000" step="0.5" oninput="calcSim()">
+          </div>
+          <input type="range" id="sellRange" min="1" max="200" step="0.5" value="12" oninput="document.getElementById('sellPrice').value=this.value;calcSim()">
+        </div>
+        <div class="sim-field">
+          <label>Ventes par mois (estimées)</label>
+          <div class="sim-input-wrap">
+            <span class="prefix" style="left:14px;font-size:.85rem">🛒</span>
+            <input type="number" id="sales" value="50" min="1" max="10000" style="padding-left:38px" oninput="calcSim()">
+          </div>
+          <input type="range" id="salesRange" min="1" max="500" value="50" oninput="document.getElementById('sales').value=this.value;calcSim()">
+        </div>
+        <div class="sim-field">
+          <label>Frais livraison estimés / commande</label>
+          <div class="sim-input-wrap">
+            <span class="prefix">€</span>
+            <input type="number" id="shipping" value="1.5" min="0" max="20" step="0.5" oninput="calcSim()">
+          </div>
+          <input type="range" id="shippingRange" min="0" max="15" step="0.5" value="1.5" oninput="document.getElementById('shipping').value=this.value;calcSim()">
+        </div>
+      </div>
+
+      <div class="sim-results">
+        <div class="sim-result">
+          <div class="r-num" id="r-marge">9,00€</div>
+          <div class="r-lbl">Marge / produit</div>
+        </div>
+        <div class="sim-result highlight">
+          <div class="r-num" id="r-mensuel">375€</div>
+          <div class="r-lbl">Bénéfice mensuel net</div>
+        </div>
+        <div class="sim-result">
+          <div class="r-num" id="r-taux">300%</div>
+          <div class="r-lbl">Taux de marge</div>
+        </div>
+        <div class="sim-result superlight">
+          <div class="r-num" id="r-annuel">4 500€</div>
+          <div class="r-lbl">Projection annuelle</div>
+        </div>
+      </div>
+
+      <div class="sim-projection">
+        <div class="proj-item">
+          <div class="proj-num" id="p-day">12,50€</div>
+          <div class="proj-lbl">Par jour</div>
+        </div>
+        <div style="width:1px;height:40px;background:rgba(255,255,255,.1)"></div>
+        <div class="proj-item">
+          <div class="proj-num" id="p-week">87,50€</div>
+          <div class="proj-lbl">Par semaine</div>
+        </div>
+        <div style="width:1px;height:40px;background:rgba(255,255,255,.1)"></div>
+        <div class="proj-item">
+          <div class="proj-num" id="p-subs" style="color:var(--or)">Rentabilisé</div>
+          <div class="proj-lbl">Abonnement en <span id="p-orders">2</span> ventes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON ===== -->
+<section class="comparison-section" id="comparaison">
+  <div class="center reveal">
+    <div class="s-badge ylw">⚖️ Comparaison</div>
+    <h2>ShopEasy vs<br><span class="grad">la concurrence</span></h2>
+    <p class="s-sub">Même fonctionnalités. Même niveau pro. Mais jusqu'à 3× moins cher. Comparez vous-même.</p>
+  </div>
+
+  <div class="comp-table reveal">
+    <div class="comp-head">
+      <div class="comp-head-cell">Fonctionnalité</div>
+      <div class="comp-head-cell us">⭐ ShopEasy</div>
+      <div class="comp-head-cell">Shopify</div>
+      <div class="comp-head-cell">Wix eCommerce</div>
+    </div>
+    <div class="comp-row"><div class="comp-feat">Prix mensuel</div><div class="comp-val price-us">9,90€</div><div class="comp-val price-bad">32€</div><div class="comp-val price-bad">17€</div></div>
+    <div class="comp-row"><div class="comp-feat">Commission sur ventes</div><div class="comp-val us-val">0%</div><div class="comp-val price-bad">2%</div><div class="comp-val yes">0%</div></div>
+    <div class="comp-row"><div class="comp-feat">Vérification SIRET vendeur</div><div class="comp-val yes">✓ Inclus</div><div class="comp-val no">✗ Non</div><div class="comp-val no">✗ Non</div></div>
+    <div class="comp-row"><div class="comp-feat">Import Alibaba / Shein / AliExpress</div><div class="comp-val yes">✓ 1 clic</div><div class="comp-val no">Plugin +15€/mois</div><div class="comp-val no">✗ Non</div></div>
+    <div class="comp-row"><div class="comp-feat">Paiement PCS (bureaux de tabac)</div><div class="comp-val yes">✓ Inclus</div><div class="comp-val no">✗ Non</div><div class="comp-val no">✗ Non</div></div>
+    <div class="comp-row"><div class="comp-feat">Séquestre paiement acheteur</div><div class="comp-val yes">✓ Automatique</div><div class="comp-val no">✗ Non</div><div class="comp-val no">✗ Non</div></div>
+    <div class="comp-row"><div class="comp-feat">Nombre de thèmes pro inclus</div><div class="comp-val us-val">10 thèmes</div><div class="comp-val no">3 gratuits</div><div class="comp-val no">3 gratuits</div></div>
+    <div class="comp-row"><div class="comp-feat">Support FR 7j/7</div><div class="comp-val yes">✓ Inclus</div><div class="comp-val no">✗ EN seulement</div><div class="comp-val yes">✓</div></div>
+    <div class="comp-row"><div class="comp-feat">Domaine offert 1 an</div><div class="comp-val yes">✓ Inclus</div><div class="comp-val no">✗ Non</div><div class="comp-val no">✗ Non</div></div>
+    <div class="comp-row"><div class="comp-feat">Simulateur de marge intégré</div><div class="comp-val yes">✓ Inclus</div><div class="comp-val no">✗ Non</div><div class="comp-val no">✗ Non</div></div>
+  </div>
+</section>
+
+<!-- ===== BLOG ===== -->
+<section class="blog-section" id="blog">
+  <div class="center reveal">
+    <div class="s-badge">📚 Conseils & Blog</div>
+    <h2>Apprenez à vendre<br><span class="grad">comme un pro</span></h2>
+    <p class="s-sub">Des guides pratiques et conseils concrets pour débuter et faire évoluer votre boutique dropshipping.</p>
+  </div>
+
+  <div class="blog-grid reveal">
+    <div class="blog-card featured">
+      <div class="blog-img bi1">
+        <span>🚀</span>
+        <div class="blog-cat">🔥 Guide complet</div>
+      </div>
+      <div class="blog-body">
+        <h4>Comment trouver des produits qui vendent sur Alibaba en 2025 ?</h4>
+        <p>Les 7 critères pour sélectionner un produit gagnant, éviter les arnaques fournisseurs, et tester votre marché avant d'investir.</p>
+        <div class="blog-meta">
+          <span class="blog-time">⏱ 8 min de lecture</span>
+          <span class="blog-read">Lire l'article →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-img bi2" style="height:130px">
+        <span>💰</span>
+        <div class="blog-cat">Stratégie</div>
+      </div>
+      <div class="blog-body">
+        <h4>Combien faut-il mettre en marge pour être compétitif ?</h4>
+        <p>La règle du ×3 et comment l'adapter selon votre niche.</p>
+        <div class="blog-meta">
+          <span class="blog-time">⏱ 4 min</span>
+          <span class="blog-read">Lire →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-img bi3" style="height:130px">
+        <span>📱</span>
+        <div class="blog-cat">Marketing</div>
+      </div>
+      <div class="blog-body">
+        <h4>TikTok & Instagram : comment attirer vos premiers clients gratuitement</h4>
+        <p>Les stratégies organiques qui fonctionnent en 2025.</p>
+        <div class="blog-meta">
+          <span class="blog-time">⏱ 6 min</span>
+          <span class="blog-read">Lire →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-img bi4" style="height:130px">
+        <span>🛡️</span>
+        <div class="blog-cat">Légal</div>
+      </div>
+      <div class="blog-body">
+        <h4>SIRET, auto-entrepreneur ou société : que choisir pour débuter ?</h4>
+        <p>Le statut le plus simple et le moins cher pour commencer à vendre légalement.</p>
+        <div class="blog-meta">
+          <span class="blog-time">⏱ 5 min</span>
+          <span class="blog-read">Lire →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-img bi5" style="height:130px">
+        <span>📦</span>
+        <div class="blog-cat">Opérationnel</div>
+      </div>
+      <div class="blog-body">
+        <h4>Gérer les retours & remboursements sans perdre d'argent</h4>
+        <p>Notre méthode pour traiter les litiges rapidement et garder vos clients satisfaits.</p>
+        <div class="blog-meta">
+          <span class="blog-time">⏱ 4 min</span>
+          <span class="blog-read">Lire →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing-section" id="tarifs">
+  <div class="center reveal">
+    <div class="s-badge">💳 Tarifs</div>
+    <h2>Simple, honnête,<br><span class="grad">sans surprise</span></h2>
+    <p class="s-sub">Un abonnement fixe. Zéro commission. Zéro frais caché. Vous gardez 100% de vos marges.</p>
+  </div>
+  <div class="p-grid reveal">
+    <div class="p-card">
+      <div class="p-name">Starter</div>
+      <div class="p-price"><sup>€</sup>0<sub>/14j</sub></div>
+      <div class="p-desc">Testez sans risque, sans carte</div>
+      <ul class="p-feats">
+        <li><span class="check">✓</span>1 boutique · 10 produits</li>
+        <li><span class="check">✓</span>3 thèmes au choix</li>
+        <li><span class="check">✓</span>Paiement CB inclus</li>
+        <li><span class="check">✓</span>Badge SIRET vérifié</li>
+        <li><span class="cross">✗</span>Import Alibaba / Shein</li>
+        <li><span class="cross">✗</span>Domaine personnalisé</li>
+      </ul>
+      <button class="p-btn">Commencer gratuitement</button>
+    </div>
+    <div class="p-card pop">
+      <div class="pop-pill">⭐ Plus populaire</div>
+      <div class="p-name">Pro</div>
+      <div class="p-price"><sup>€</sup>9,90<sub>/mois</sub></div>
+      <div class="p-desc">Pour les vendeurs ambitieux</div>
+      <ul class="p-feats">
+        <li><span class="check">✓</span>Boutique + produits illimités</li>
+        <li><span class="check">✓</span>10 thèmes pro + couleurs custom</li>
+        <li><span class="check">✓</span>Import Alibaba / Shein / AliExpress</li>
+        <li><span class="check">✓</span>CB, PayPal, Apple Pay, PCS, Virement</li>
+        <li><span class="check">✓</span>Séquestre paiement acheteur</li>
+        <li><span class="check">✓</span>Badge vendeur vérifié 🛡️</li>
+        <li><span class="check">✓</span>Domaine offert 1 an</li>
+        <li><span class="check">✓</span>Support FR prioritaire 7j/7</li>
+        <li><span class="check">✓</span>0% commission sur vos ventes</li>
+      </ul>
+      <button class="p-btn">Démarrer à 9,90€/mois</button>
+    </div>
+    <div class="p-card">
+      <div class="p-name">Business</div>
+      <div class="p-price"><sup>€</sup>24<sub>/mois</sub></div>
+      <div class="p-desc">Pour passer à la vitesse supérieure</div>
+      <ul class="p-feats">
+        <li><span class="check">✓</span>Tout du plan Pro</li>
+        <li><span class="check">✓</span>5 boutiques multi-comptes</li>
+        <li><span class="check">✓</span>Analytics & statistiques avancés</li>
+        <li><span class="check">✓</span>Campagnes email marketing</li>
+        <li><span class="check">✓</span>Manager dédié</li>
+        <li><span class="check">✓</span>API & intégrations custom</li>
+      </ul>
+      <button class="p-btn">Passer Business</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta">
+  <div class="final-cta-bg"></div>
+  <div class="final-cta-grid"></div>
+  <div class="final-cta-content reveal">
+    <div class="s-badge" style="margin-bottom:24px">🎯 Prêt à vous lancer ?</div>
+    <h2>Votre empire commence<br><span class="grad">aujourd'hui.</span></h2>
+    <p>Plus de 1 400 entrepreneurs ont déjà lancé leur boutique. À votre tour — 14 jours gratuits, sans carte bancaire.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="#demo" class="btn-hero">🚀 Créer ma boutique — Gratuit</a>
+      <a href="#simulateur" class="btn-hero2">💰 Simuler mes gains d'abord</a>
+    </div>
+    <div class="cta-trust-chips">
+      <div class="trust-chip-dk"><span class="ic">✓</span> SIRET vérifié</div>
+      <div class="trust-chip-dk"><span class="ic">✓</span> 0% commission</div>
+      <div class="trust-chip-dk"><span class="ic">✓</span> 14 jours gratuits</div>
+      <div class="trust-chip-dk"><span class="ic">✓</span> Résiliation libre</div>
+      <div class="trust-chip-dk"><span class="ic">✓</span> Support FR 7j/7</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo"><div class="logo-mark">🛍</div> ShopEasy</a>
+      <p>La plateforme dropshipping sécurisée et accessible. Vendeurs vérifiés SIRET. 0% commission. À partir de 9,90€/mois.</p>
+      <div class="footer-social">
+        <div class="soc-btn">📘</div>
+        <div class="soc-btn">📸</div>
+        <div class="soc-btn">🎵</div>
+        <div class="soc-btn">▶️</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Plateforme</h5>
+      <ul>
+        <li><a href="#">Créer ma boutique</a></li>
+        <li><a href="#">Les 10 thèmes</a></li>
+        <li><a href="#">Import produits</a></li>
+        <li><a href="#">Modes de paiement</a></li>
+        <li><a href="#">Tarifs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Ressources</h5>
+      <ul>
+        <li><a href="#">Blog & Conseils</a></li>
+        <li><a href="#">Guide débutant</a></li>
+        <li><a href="#">Simulateur de marge</a></li>
+        <li><a href="#">Centre d'aide</a></li>
+        <li><a href="#">Témoignages</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Légal</h5>
+      <ul>
+        <li><a href="#">Mentions légales</a></li>
+        <li><a href="#">CGV</a></li>
+        <li><a href="#">Confidentialité</a></li>
+        <li><a href="#">Protection acheteurs</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 ShopEasy · Fait avec ❤️ en France</span>
+    <div class="footer-badges">
+      <span class="f-badge">🔒 Stripe Secure</span>
+      <span class="f-badge">🛡️ RGPD Conforme</span>
+      <span class="f-badge">🇫🇷 Hébergé en France</span>
+      <span class="f-badge">⭐ 4.9/5 Avis vérifiés</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== CUSTOM CURSOR =====
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button,.demo-step,.blog-card,.theme-card,.cat-btn,.demo-btn-go,.brand-logo,.color-swatch,.theme-mini,.cat-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';ring.style.width='60px';ring.style.height='60px';ring.style.borderColor='rgba(255,77,0,.6)'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';ring.style.width='40px';ring.style.height='40px';ring.style.borderColor='rgba(255,77,0,.4)'});
+});
+
+// ===== PARTICLES =====
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+let particles=[];
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+resizeCanvas();
+window.addEventListener('resize',resizeCanvas);
+class Particle{
+  constructor(){
+    this.x=Math.random()*canvas.width;
+    this.y=Math.random()*canvas.height;
+    this.size=Math.random()*1.5+.5;
+    this.speedX=(Math.random()-.5)*.3;
+    this.speedY=(Math.random()-.5)*.3;
+    this.opacity=Math.random()*.4+.1;
+    this.color=Math.random()>.7?'rgba(255,77,0,':'rgba(0,229,160,';
+  }
+  update(){
+    this.x+=this.speedX;this.y+=this.speedY;
+    if(this.x<0||this.x>canvas.width)this.speedX*=-1;
+    if(this.y<0||this.y>canvas.height)this.speedY*=-1;
+  }
+  draw(){
+    ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fillStyle=this.color+this.opacity+')';ctx.fill();
+  }
+}
+for(let i=0;i<80;i++)particles.push(new Particle());
+function animParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // Only draw particles in hero area
+  const heroH=canvas.height;
+  particles.forEach(p=>{
+    if(p.y<heroH){p.update();p.draw();}
+  });
+  // Draw connecting lines
+  particles.forEach((p,i)=>{
+    particles.slice(i+1).forEach(p2=>{
+      const d=Math.hypot(p.x-p2.x,p.y-p2.y);
+      if(d<120){
+        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);
+        ctx.strokeStyle=`rgba(255,77,0,${.06*(1-d/120)})`;
+        ctx.lineWidth=.5;ctx.stroke();
+      }
+    });
+  });
+  requestAnimationFrame(animParticles);
+}
+animParticles();
+
+// ===== DEMO INTERACTIVE =====
+function showPanel(n,stepEl){
+  document.querySelectorAll('.demo-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.demo-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('panel'+n).classList.add('active');
+  if(stepEl)stepEl.classList.add('active');
+}
+function selCat(el){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function selTheme(el){
+  document.querySelectorAll('.theme-mini').forEach(t=>t.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function selColor(el){
+  document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('sel'));
+  el.classList.add('sel');
+}
+let prodCount=2;
+function importProduct(){
+  prodCount++;
+  const emojis=['📱','👟','🎒','⌚','💡','🎧','🖥️'];
+  const names=['Coque téléphone','Sneakers stylées','Sac à dos','Montre connectée','Lampe LED','Écouteurs sans fil','Écran portable'];
+  const prices=[['1,5€','9€'],['8€','35€'],['5€','22€'],['12€','49€'],['3€','14€'],['7€','28€'],['25€','79€']];
+  const i=(prodCount-3)%emojis.length;
+  const item=document.createElement('div');
+  item.className='prod-mini';
+  item.style.animation='fadeUp .3s ease';
+  item.innerHTML=`<span class="pm-img">${emojis[i]}</span><div class="pm-info"><div class="pm-name">${names[i]}</div><div class="pm-price">Achat ${prices[i][0]} → Vous vendez ${prices[i][1]}</div></div><span class="pm-badge">Importé ✓</span>`;
+  document.getElementById('prodList').appendChild(item);
+}
+function updateShopName(v){
+  const n=v||'MA BOUTIQUE';
+  document.getElementById('lsLogoText').textContent=n.toUpperCase();
+  document.getElementById('liveUrl').textContent=(v?v.toLowerCase().replace(/\s+/g,'-'):'maboutique')+'.shopeasy.fr';
+}
+
+// ===== SIMULATOR =====
+function calcSim(){
+  const buy=parseFloat(document.getElementById('buyPrice').value)||0;
+  const sell=parseFloat(document.getElementById('sellPrice').value)||0;
+  const sales=parseInt(document.getElementById('sales').value)||0;
+  const ship=parseFloat(document.getElementById('shipping').value)||0;
+  const marge=sell-buy-ship;
+  const monthly=marge*sales;
+  const taux=buy>0?Math.round((marge/buy)*100):0;
+  const annual=monthly*12;
+  const day=monthly/30;
+  const week=monthly/4.3;
+  const ordersToBreakeven=marge>0?Math.ceil(9.9/marge):99;
+  // Animate numbers
+  animNum('r-marge',marge,'€',2);
+  animNum('r-mensuel',monthly,'€',0);
+  animNum('r-taux',taux,'%',0);
+  animNum('r-annuel',annual,'€',0);
+  animNum('p-day',day,'€',2);
+  animNum('p-week',week,'€',2);
+  document.getElementById('p-orders').textContent=ordersToBreakeven;
+}
+function animNum(id,target,suffix,dec){
+  const el=document.getElementById(id);
+  const current=parseFloat(el.textContent)||0;
+  const diff=target-current;
+  const steps=20;let step=0;
+  const interval=setInterval(()=>{
+    step++;
+    const val=current+(diff*(step/steps));
+    el.textContent=val.toFixed(dec).replace('.',',')+(suffix==='€'?'€':'%');
+    if(step>=steps){el.textContent=target.toFixed(dec).replace('.',',')+suffix;clearInterval(interval)}
+  },16);
+}
+calcSim();
+// sync ranges
+['buy','sell','sales','shipping'].forEach(k=>{
+  const inp=document.getElementById(k==='buy'?'buyPrice':k==='sell'?'sellPrice':k==='sales'?'sales':'shipping');
+  const rng=document.getElementById(k+'Range');
+  if(inp&&rng){
+    inp.addEventListener('input',()=>{rng.value=inp.value});
+    rng.addEventListener('input',()=>{inp.value=rng.value;calcSim()});
+  }
+});
+
+// ===== SCROLL REVEALS =====
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible')}
+  });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ===== NAV SCROLL =====
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').style.boxShadow=
+    window.scrollY>40?'0 4px 30px rgba(0,0,0,.5)':'none';
+});
+
+// ===== COUNTER ANIMATION on ticker =====
+// Live counter increment
+setInterval(()=>{
+  const nums=document.querySelectorAll('.ticker-num');
+  // Occasionally flicker a number
+  const idx=Math.floor(Math.random()*nums.length);
+  nums[idx].style.transform='scale(1.1)';
+  setTimeout(()=>nums[idx].style.transform='',300);
+},3000);
+</script>
+</body>
+</html>
